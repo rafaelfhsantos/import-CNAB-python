@@ -8,6 +8,6 @@ class Cnab(models.Model):
     transaction_value = models.FloatField()
     transaction_cpf = models.CharField(max_length=11) 
     transaction_card = models.CharField(max_length=12)
-    transaction_hour = models.CharField(max_length=6) 
+    transaction_hour = models.CharField(max_length=8) 
     transaction_shop_owner = models.CharField(max_length=14)
     transaction_shop_name = models.CharField(max_length=19)

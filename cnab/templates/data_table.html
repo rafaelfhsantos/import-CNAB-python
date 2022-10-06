@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Importador de CNAB</title>
+  </head>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      padding: 5px;
+    }
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+  <body>
+    <h2>Dados Inseridos com sucesso!</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tipo da Transação</th>
+          <th>Data</th>
+          <th>Valor</th>
+          <th>CPF</th>
+          <th>Cartão</th>
+          <th>Hora</th>
+          <th>Dono da Loja</th>
+          <th>Nome da Loja</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cnab in cnabs %}
+        <tr>
+          <td>
+            <span>{{ cnab.0 }}</span>
+          </td>
+          <td>
+            <span>{{ cnab.1 }}</span>
+          </td>
+          <td>
+            <span>{{ cnab.2 }}</span>
+          </td>
+          <td>
+            <span>{{ cnab.3 }}</span>
+          </td>
+          <td>
+            <span>{{ cnab.4 }}</span>
+          </td>
+          <td>
+            <span>{{ cnab.5 }}</span>
+          </td>
+          <td>
+            <span>{{ cnab.6 }}</span>
+          </td>
+          <td>
+            <span>{{ cnab.7 }}</span>
+          </td>
+          <td>
+            <span>{{ cnab.8 }}</span>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

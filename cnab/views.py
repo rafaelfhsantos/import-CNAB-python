@@ -5,16 +5,14 @@ from cnab.models import Cnab
 from cnab.serializers import CnabSerializer
 from .forms import UploadFileForm
 
-# Imaginary function to handle an uploaded file.
-from .utils import handle_uploaded_file
-
 from datetime import date
 
 def home(request):
     return render(request, 'home.html')
-        
 
-def handle_file(request):    
+
+def handle_file(request):   
+    try: 
         form = UploadFileForm(request.POST, request.FILES)
 
         for line in request.FILES['filename'].readlines():
@@ -39,18 +37,22 @@ def handle_file(request):
                 'transaction_value': transaction_value,
                 'transaction_cpf': transaction_cpf,
                 'transaction_card': transaction_card,
-                'transaction_hour': transaction_hour,
+                'transaction_hour': transaction_hour[0:2]+':' + transaction_hour[2:4] + ':' + transaction_hour[4:7],
                 'transaction_shop_owner': transaction_shop_owner,
                 'transaction_shop_name': transaction_shop_name
-            }   
-
-            print(cnab_data)
+            }               
 
             serializer = CnabSerializer(data=cnab_data)
             serializer.is_valid(raise_exception=True)
             serializer.save()    
 
-        return HttpResponse("Dados importados com sucesso!")
+            cnabs = {'cnabs': Cnab.objects.all().values_list()} 
+
+
+        return render(request, 'data_table.html',cnabs)
+    
+    except:
+        return render(request, 'home_error.html')
 
 
   
